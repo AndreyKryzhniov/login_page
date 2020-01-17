@@ -1,12 +1,20 @@
+const ADD_LOGIN = 'ADD_LOGIN'
+const ADD_PASSWORD = 'ADD_PASSWORD'
 
-
-const reducerLogin = (state: IState = initialState, action: IAction): IState => {
-    if (actionTypes.hasOwnProperty(action.type)) {
-        return actionTypes[action.type](state, action.value)
-    } else {
-        return state
-    }
+interface IState {
+    value: string
 }
 
+interface IAction {
+    type: typeof ADD_LOGIN | typeof ADD_PASSWORD
+}
+
+const initialState = {
+    value: ''
+}
+
+export const reducerLogin = (state = initialState, action: IAction): IState => {
+    return state
+}
 
 export default reducerLogin
