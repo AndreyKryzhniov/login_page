@@ -1,14 +1,10 @@
-const initialState: IState = {
-    login: 1
-}
+const initialState = {
 
-const reducerRegistration = (state: IState = initialState, action: IAction): IState => {
-    if (actionTypes.hasOwnProperty(action.type)) {
-        return actionTypes[action.type](state, action.value)
-    } else {
-        return state
-    }
-}
+};
+
+const reducerRegistration = (state: any = initialState, action: any): any => {
+    return state;
+};
 
 
 export default reducerRegistration

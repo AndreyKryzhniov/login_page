@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 
 
 const Login: React.FC = () => {
@@ -8,6 +7,6 @@ const Login: React.FC = () => {
 
     </div>
   );
-}
+};
 
 export default Login;

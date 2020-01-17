@@ -1,12 +1,10 @@
+const initialState = {
 
+};
 
-const reducerLogin = (state: IState = initialState, action: IAction): IState => {
-    if (actionTypes.hasOwnProperty(action.type)) {
-        return actionTypes[action.type](state, action.value)
-    } else {
-        return state
-    }
-}
+const reducerLogin = (state: any = initialState, action: any): any => {
+    return state;
+};
 
 
 export default reducerLogin

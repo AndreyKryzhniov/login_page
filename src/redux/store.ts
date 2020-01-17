@@ -10,11 +10,11 @@ const rootReducer = combineReducers({
     login: reducerLogin,
     registration: reducerRegistration,
     password: reducerPasswordRecovery,
-    profile: reducerProfileRecovery,
-})
+    profile: reducerProfileRecovery
+});
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
-export default store
+export default store;

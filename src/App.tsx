@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {Route} from "react-router-dom";
 import Login from './Components/Login'
-import Registration from './Components/Registration'
+import Registration from './Components/Registration/Registration'
 import PasswordRecover from './Components/PasswordRecover'
 import ProfileRecover from './Components/ProfileRecover'
 
