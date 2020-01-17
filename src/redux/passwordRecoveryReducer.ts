@@ -1,14 +1,25 @@
-const initialState: IState = {
-    login: 1
+
+const ADD_LOGIN = 'ADD_LOGIN'
+const ADD_PASSWORD = 'ADD_PASSWORD'
+
+interface IState {
+    value: string
 }
 
-const reducerPasswordRecovery = (state: IState = initialState, action: IAction): IState => {
-    if (actionTypes.hasOwnProperty(action.type)) {
-        return actionTypes[action.type](state, action.value)
-    } else {
-        return state
-    }
+interface IAction {
+    type: typeof ADD_LOGIN | typeof ADD_PASSWORD
 }
 
+const initialState = {
+    value: ''
+}
+
+export const reducerPasswordRecovery = (state = initialState, action: IAction): IState => {
+    return state
+}
+
+export const sendRecoveryPasswordRequest = (email: any) =>{
+    
+}
 
 export default reducerPasswordRecovery

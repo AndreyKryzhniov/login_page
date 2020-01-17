@@ -4,15 +4,17 @@ import {Route} from "react-router-dom";
 import Login from './Components/Login'
 import Registration from './Components/Registration'
 import PasswordRecover from './Components/PasswordRecover'
-import ProfileRecover from './Components/ProfileRecover'
+
+import Header from './Components/header';
 
 const App: React.FC = () => {
   return (
     <div className="App">
+      <Header/>
       <Route render ={ () => <Login/>} path='/login'/>
       <Route render ={ () => <Registration/>} path='/registration'/>
       <Route render ={ () => <PasswordRecover/>} path='/password_recover'/>
-      <Route render ={ () => <ProfileRecover/>} path='/profile_recover'/>
+
     </div>
   );
 }
