@@ -16,7 +16,7 @@ const Login: React.FC = () => {
   let sendData = () => {
     dispatch(putLoginTC(email, password, rememberMe))
   }
-
+  debugger
 
   return (
     <div className={s.login}>
@@ -24,16 +24,11 @@ const Login: React.FC = () => {
       <input value={email} onChange={(e) => setLoginState(e.target.value)}/>
       <input value={password} onChange={(e) => setPasswordState(e.target.value)} type={'password'}/>
       <NavLink to={'/password_recover'}>Forgot password?</NavLink>
-      <input type={'checkbox'} placeholder={'Remember Me'} onChange={() => setValueState(true)} checked={rememberMe}/>
+      <input type={'checkbox'} placeholder={'Remember Me'} onChange={() => setValueState(!rememberMe)} checked={rememberMe}/>
       <button onClick={sendData}>Sing In</button>
       <NavLink to={'/registration'}>Registration</NavLink>
     </div>
   );
 }
-
-
-
-
-
 
 export default Login
