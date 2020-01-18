@@ -1,13 +1,14 @@
+import {recoveryAPI} from '../api-recovery/api'
+const ADD_RECOVERY = 'ADD_RECOVERY'
 
-const ADD_LOGIN = 'ADD_LOGIN'
-const ADD_PASSWORD = 'ADD_PASSWORD'
 
 interface IState {
     value: string
 }
 
 interface IAction {
-    type: typeof ADD_LOGIN | typeof ADD_PASSWORD
+    type: typeof ADD_RECOVERY
+    message: string
 }
 
 const initialState = {
@@ -15,10 +16,23 @@ const initialState = {
 }
 
 export const reducerPasswordRecovery = (state = initialState, action: IAction): IState => {
+    if(action.type){
+        debugger
+        return{...state, value: action.message}
+    }
     return state
 }
+const setRecoveryMessage = (message: any)=> {
+    return{ type: ADD_RECOVERY, message}
+}
 
-export const sendRecoveryPasswordRequest = (email: any) =>{
+export const sendRecoveryPasswordRequest = (email: any) => async(dispatch: any) =>{
+    try{let response = await recoveryAPI.recovery(email)
+    }
+    catch(error){
+        debugger
+        alert(error.response.data.error)}
+    
     
 }
 

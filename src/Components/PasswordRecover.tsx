@@ -5,12 +5,14 @@ import { sendRecoveryPasswordRequest } from '../redux/passwordRecoveryReducer';
 
 
 const PasswordRecover: React.FC = () => {
-  let [emailValue , setEmailValue] = useState(false)
+  const [emailValue , setEmailValue] = useState('')
   const dispatch = useDispatch()
   let sendEmailValue = (e:any) =>{
     setEmailValue(e.currentTarget.value)
   }
   const sendRecoveryPassword = () =>{
+
+    debugger
       dispatch(sendRecoveryPasswordRequest(emailValue))
   }
   

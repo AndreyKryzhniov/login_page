@@ -6,8 +6,6 @@ import thunkMiddleware from "redux-thunk";
 
 
 const rootReducer = combineReducers({
-
-
     profile: reducerProfileRecovery
 })
 
