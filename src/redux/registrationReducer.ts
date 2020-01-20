@@ -1,13 +1,14 @@
 import {apiRegistration} from '../apiRegistration/apiRegistration';
 
 const ERROR_REGISTRATION_DATA = 'ERROR_REGISTRATION_DATA';
-const IS_REGISTRATION_REQUEST_TRUE = 'IS_REGISTRATION_REQUEST_TRUE';
-const IS_REGISTRATION_REQUEST_FALSE = 'IS_REGISTRATION_REQUEST_FALSE';
+const REGISTRATION_REQUEST = 'REGISTRATION_REQUEST';
+const AUTH_SUCCESS = 'AUTH_SUCCESS';
 
 
 const initialState = {
     error: '',
-    isLoading: false
+    isLoading: false,
+    success: false
 };
 
 const reducerRegistration = (state: any = initialState, action: any): any => {
@@ -17,50 +18,51 @@ const reducerRegistration = (state: any = initialState, action: any): any => {
                 ...state,
                 error: action.error
             };
-        case IS_REGISTRATION_REQUEST_TRUE:
+        case REGISTRATION_REQUEST:
+            return {
+                ...state,
+                isLoading: !state.isLoading
+            };
+        case AUTH_SUCCESS:
         return {
             ...state,
-            isLoading: true
-        };
-        case IS_REGISTRATION_REQUEST_FALSE:
-        return {
-            ...state,
-            isLoading: false
+            success: action.success
         }
-    }
-    return state;
+}
+return state;
 };
 
-const errorRegistrationData = (error: any) => {
+export const errorRegistrationData = (error: any) => {
     return {
         type: ERROR_REGISTRATION_DATA,
         error
     }
 };
 
-const isRegistrationRequestTrue = () => {
+const isRegistrationRequestSend = () => {
     return {
-    type: IS_REGISTRATION_REQUEST_TRUE
+        type: REGISTRATION_REQUEST
     }
 };
 
-const isRegistrationRequestFalse = () => {
+const isAuthSuccess = (success: boolean) => {
     return {
-    type: IS_REGISTRATION_REQUEST_FALSE
+        type: AUTH_SUCCESS,
+        success
     }
 };
 
 
-
-export const sendRegistrationRequest = (email:any, password: any) => async (dispatch: any) => {
+export const sendRegistrationRequest = (email: string, password: string) => async (dispatch: any) => {
     try {
-        dispatch(isRegistrationRequestTrue());
+        dispatch(isRegistrationRequestSend());
         let response = await apiRegistration.sendEmail(email, password);
-    }
-    catch(error) {
+        console.log(response);
+        dispatch(isAuthSuccess(response.data.success));
+    } catch (error) {
         dispatch(errorRegistrationData(error.response.data.error))
     }
-    dispatch(isRegistrationRequestFalse());
+    dispatch(isRegistrationRequestSend());
 };
 
 export default reducerRegistration;
