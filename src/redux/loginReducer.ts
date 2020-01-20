@@ -44,7 +44,6 @@ export const reducerLogin = (state: IState = initialState, action: IAction): ISt
 let putValueAC = (email: string, password: string, rememberMe: boolean) => ({type: LOGIN, email, password, rememberMe})
 
 export const putLoginTC = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch) => {
-    debugger
     let response = await loginApi.putLogin(email, password, rememberMe)
     dispatch(putValueAC(response.data.email, response.data.password, response.data.rememberMe))
 }

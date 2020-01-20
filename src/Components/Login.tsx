@@ -4,8 +4,6 @@ import {NavLink} from "react-router-dom";
 import {putLoginTC} from '../redux/loginReducer'
 import {useDispatch} from 'react-redux';
 
-
-
 const Login: React.FC = () => {
 
   let [email, setLoginState] = useState('')
@@ -16,7 +14,6 @@ const Login: React.FC = () => {
   let sendData = () => {
     dispatch(putLoginTC(email, password, rememberMe))
   }
-  debugger
 
   return (
     <div className={s.login}>

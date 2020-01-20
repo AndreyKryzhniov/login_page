@@ -6,7 +6,6 @@ const instance = axios.create({
 
 export const loginApi = {
     putLogin(email: string, password: string, rememberMe: boolean) {
-        debugger
         return instance.post(`login`, {email: email, password: password, rememberMe: rememberMe})
     }
 }
