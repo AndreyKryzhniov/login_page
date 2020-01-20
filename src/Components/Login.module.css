@@ -5,6 +5,6 @@
   justify-content: center;
 }
 
-span {
-  margin-bottom: 20px;
+.error {
+  color: red;
 }

@@ -1,34 +1,27 @@
 import {loginApi} from '../api/apiLogin'
 import {Dispatch} from "redux";
 
+const ERROR = 'ERROR'
 
-
-const LOGIN = 'LOGIN'
-
-interface IState {
-    email: string,
-    password: string,
-    rememberMe: boolean
+export interface IState {
+    error: string
 }
 
-interface IAction {
-    type: typeof LOGIN
-    email: string
-    password: string
-    rememberMe: boolean
+    interface IAction {
+    type: typeof ERROR
+    error: string
 }
+
 
 const initialState: IState = {
-    email: '',
-    password: '',
-    rememberMe: false
+    error: ''
 }
 
 export const reducerLogin = (state: IState = initialState, action: IAction): IState => {
     switch (action.type) {
-        case LOGIN: {
+        case ERROR: {
             return {
-                ...state, email: action.email, password: action.password, rememberMe: action.rememberMe
+                ...state, error: action.error
             }
         }
         default: {
@@ -37,11 +30,14 @@ export const reducerLogin = (state: IState = initialState, action: IAction): ISt
     }
 }
 
-let putValueAC = (email: string, password: string, rememberMe: boolean) => ({type: LOGIN, email, password, rememberMe})
+let errorLoginAC = (error: string) => ({type: ERROR, error})
 
 export const putLoginTC = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch) => {
-    let response = await loginApi.putLogin(email, password, rememberMe)
-    dispatch(putValueAC(response.data.email, response.data.password, response.data.rememberMe))
+    try {
+        await loginApi.putLogin(email, password, rememberMe)
+    } catch (e) {
+        dispatch(errorLoginAC(e.response.data.error))
+    }
 }
 
 export default reducerLogin
