@@ -1,4 +1,4 @@
-import {recoveryAPI} from '../api-recovery/api'
+// import {recoveryAPI} from '../api-recovery/api'
 const ADD_RECOVERY = 'ADD_RECOVERY'
 
 
@@ -27,7 +27,8 @@ const setRecoveryMessage = (message: any)=> {
 }
 
 export const sendRecoveryPasswordRequest = (email: any) => async(dispatch: any) =>{
-    try{let response = await recoveryAPI.recovery(email)
+    try {
+        // let response = await recoveryAPI.recovery(email)
     }
     catch(error){
         debugger
