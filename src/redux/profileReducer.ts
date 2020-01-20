@@ -1,4 +1,4 @@
-import {loginApi} from '../api/apiLogin'
+import {profileApi} from '../api/apiProfile'
 import {Dispatch} from "redux";
 
 const ERROR = 'ERROR'
@@ -28,11 +28,11 @@ interface IActionLoading {
 const initialState: IState = {
     error: '',
     isLoading: false,
-    token: '4620b880-3bcf-11ea-a0b1-c165d13b809e',
+    token: '',
     name: ''
 }
 
-const reducerLogin = (state: IState = initialState, action: IActionError | IActionLoading): IState => {
+export const reducerProfile = (state: IState = initialState, action: IActionError | IActionLoading): IState => {
     switch (action.type) {
         case ERROR: {
             return {
@@ -55,20 +55,19 @@ const reducerLogin = (state: IState = initialState, action: IActionError | IActi
     }
 }
 
-export let errorLoginAC = (error: string) => ({type: ERROR, error})
+export let errorProfileAC = (error: string) => ({type: ERROR, error})
 let saveDataAC = (name: string, token: string) => ({type: DATA, name, token})
-let isLoginAC = () => ({type: LOADING})
+let isLoadingAC = () => ({type: LOADING})
 
-export const putLoginTC = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch) => {
+export const postProfileTC = (token: string) => async (dispatch: Dispatch) => {
     try {
-        dispatch(isLoginAC())
-        debugger
-        let response = await loginApi.putLogin(email, password, rememberMe)
+        dispatch(isLoadingAC())
+        let response = await profileApi.postProfile(token)
         dispatch(saveDataAC(response.data.name, response.data.token))
     } catch (e) {
-        dispatch(errorLoginAC(e.response.data.error))
+        dispatch(errorProfileAC(e.response.data.error))
     }
-    dispatch(isLoginAC())
+    dispatch(isLoadingAC())
 }
 
-export default reducerLogin
+export default reducerProfile

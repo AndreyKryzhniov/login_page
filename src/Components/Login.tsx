@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import s from './Login.module.css';
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {errorLoginAC, putLoginTC} from '../redux/loginReducer'
 import {useDispatch, useSelector} from 'react-redux';
 import {AppStateType} from '../redux/store';
@@ -13,6 +13,8 @@ const Login: React.FC = () => {
     let [rememberMe, setValueState] = useState(false)
     let error = useSelector((store: AppStateType) => store.login.error);
     let isAuth = useSelector((store: AppStateType) => store.login.isLoading);
+    let tokenLogin = useSelector((store: AppStateType) => store.login.token);
+    let tokenProfile = useSelector((store: AppStateType) => store.profile.token);
     // let token = useSelector((store: AppStateType) => store.login.token)
     // let [tokenValue, setToken] = useState(token)
 
@@ -24,11 +26,15 @@ const Login: React.FC = () => {
     }
 
     let sendData = () => {
-        if (!validationEmail(email) || password.length < 6) {
+        if (!validationEmail(email) || password.length < 7) {
             dispatch(errorLoginAC('Email/Password введен не корректно'))
         } else {
             dispatch(putLoginTC(email, password, rememberMe))
         }
+    }
+
+    if (tokenLogin === tokenProfile) {
+        return <Redirect to={'/profile'}/>
     }
 
     return (
