@@ -1,6 +1,3 @@
-// const ADD_LOGIN = 'ADD_LOGIN'
-// const ADD_PASSWORD = 'ADD_PASSWORD'
-// const REMEMBER_ME = 'REMEMBER_ME'
 import {loginApi} from '../api/apiLogin'
 import {Dispatch} from "redux";
 
@@ -19,7 +16,6 @@ interface IAction {
     email: string
     password: string
     rememberMe: boolean
-    // type: typeof ADD_LOGIN | typeof ADD_PASSWORD | typeof REMEMBER_ME
 }
 
 const initialState: IState = {

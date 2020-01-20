@@ -1,9 +1,6 @@
 import React from 'react';
 import {Route} from "react-router-dom";
 import Login from './Components/Login'
-// import Registration from './Components/Registration'
-// import PasswordRecover from './Components/PasswordRecover'
-// import ProfileRecover from './Components/ProfileRecover'
 
 const App: React.FC = () => {
   return (
