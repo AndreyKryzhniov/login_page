@@ -12,7 +12,7 @@ const instance = axios.create({
 
 export const recoveryAPI = {
     recovery(email) {
-        debugger
+
         return instance.post(`auth/forgot`, {email})
     }
 }

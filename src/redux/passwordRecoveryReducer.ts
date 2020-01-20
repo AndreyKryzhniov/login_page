@@ -17,7 +17,6 @@ const initialState = {
 
 export const reducerPasswordRecovery = (state = initialState, action: IAction): IState => {
     if(action.type){
-        debugger
         return{...state, value: action.message}
     }
     return state
@@ -31,7 +30,7 @@ export const sendRecoveryPasswordRequest = (email: any) => async(dispatch: any) 
         // let response = await recoveryAPI.recovery(email)
     }
     catch(error){
-        debugger
+
         alert(error.response.data.error)}
     
     
