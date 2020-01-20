@@ -12,7 +12,6 @@ const PasswordRecover: React.FC = () => {
   }
   const sendRecoveryPassword = () =>{
 
-    debugger
       dispatch(sendRecoveryPasswordRequest(emailValue))
   }
   
