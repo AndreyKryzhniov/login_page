@@ -6,40 +6,56 @@ import {NavLink} from "react-router-dom";
 import loading from "../Registration/svgImages/loading.svg";
 
 
-const Registration: React.FC = (props:any) => {
+const Registration: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [repeatPassword, setRepeatPassword] = useState('');
     const dispatch = useDispatch();
-    const error = useSelector((store:any) => store.registration.error);
-    const isloading = useSelector((store:any) => store.registration.isLoading);
-    useEffect(() => {}, [error]);
-    useEffect(() => {}, [isloading]);
+    let error = useSelector((store: any) => store.registration.error);
+    const isloading = useSelector((store: any) => store.registration.isLoading);
+    useEffect(() => {
+    }, [error]);
+    useEffect(() => {
+    }, [isloading]);
 
-  return (
-    <div className={s.registration}>
-        <span>Register</span>
-        <div>
-            <span>Email:</span>
-            <input type="text" onChange={(e: any) => {setEmail(e.currentTarget.value)}}/>
-        </div>
-        <div>
-            <span>Password:</span>
-            <input type="text" onChange={(e:any) => {setPassword(e.currentTarget.value)}}/>
-        </div>
-        <div>
-            <span>Repeat password:</span>
-            <input type="text" />
-        </div>
-        <span className={s.sp}>{error}</span>
-
-        {isloading &&
-            <span><img src={loading} alt=""/></span>
+    const onSetEmail = (e: any) => {
+        setEmail(e.currentTarget.value)
+    };
+    const onSetPassword = (e: any) => {
+        setPassword(e.currentTarget.value)
+    };
+    const onSetRepeatPassword = (e: any) => {
+        setRepeatPassword(e.currentTarget.value)
+    };
+    const onRegisterClick = () => {
+        if(repeatPassword === password) {
+            dispatch(sendRegistrationRequest(email, password))
         }
+    };
 
-        <button onClick={() => {dispatch(sendRegistrationRequest(email, password))}} disabled={isloading}>Register</button>
-        <NavLink to='/login'>Sign in</NavLink>
-    </div>
-  );
+    return (
+        <div className={s.registration}>
+            <span>Register</span>
+            <div>
+                <span>Email:</span>
+                <input type="text" onChange={onSetEmail}/>
+            </div>
+            <div>
+                <span>Password:</span>
+                <input type="password" onChange={onSetPassword}/>
+            </div>
+            <div>
+                <span>Repeat password:</span>
+                <input type="password" onChange={onSetRepeatPassword}/>
+            </div>
+            <span className={s.sp}>{error}</span>
+            {isloading &&
+            <span><img src={loading} alt=""/></span>
+            }
+            <button onClick={onRegisterClick} disabled={isloading}>Register</button>
+            <NavLink to='/login'>Sign in</NavLink>
+        </div>
+    );
 };
 
 export default Registration;
