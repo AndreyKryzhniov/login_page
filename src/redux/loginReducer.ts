@@ -1,6 +1,6 @@
 import {loginApi} from '../api/apiLogin'
 import {Dispatch} from "redux";
-import { isAuthFalse } from './profileReducer';
+import {isAuthFalse} from './profileReducer';
 
 const ERROR = 'ERROR'
 const LOADING = 'LOADING'

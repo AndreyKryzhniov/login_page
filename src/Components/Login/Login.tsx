@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import s from './Login.module.css';
 import {NavLink, Redirect} from "react-router-dom";
-import {errorLoginAC, putLoginTC} from '../redux/loginReducer'
+import {errorLoginAC, putLoginTC} from '../../redux/loginReducer'
 import {useDispatch, useSelector} from 'react-redux';
-import {AppStateType} from '../redux/store';
-import loading from '../Components/Registration/svgImages/loading.svg'
+import {AppStateType} from '../../redux/store';
+import loading from '../Registration/svgImages/loading.svg'
 
 const Login: React.FC = () => {
 

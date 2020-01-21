@@ -1,4 +1,5 @@
 import React, {useEffect, /*useState*/} from 'react';
+import s from './Profile.module.css'
 import {useDispatch, useSelector} from 'react-redux';
 import {AppStateType} from '../../redux/store';
 import {postProfileTC, logoutTC} from "../../redux/profileReducer";
@@ -23,8 +24,8 @@ const Profile: React.FC = () => {
     }
 
     return (
-        <div>
-            <span>{name}</span>
+        <div className={s.profile}>
+            <h1>{name}</h1>
             <button onClick={() => {
                 dispatch(logoutTC())
             }}>Log out

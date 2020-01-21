@@ -14,7 +14,7 @@ const Header: React.FC = () => {
 <NavLink style = {{textDecoration : 'none', color: 'black'}} to='/login'>sign-in</NavLink>
 <NavLink style = {{textDecoration : 'none', color: 'black'}} to='/registration'>register</NavLink>
 <NavLink style = {{textDecoration : 'none', color: 'black'}} to='/password_recover'>forgot</NavLink>
-<NavLink style = {{textDecoration : 'none', color: 'black'}} to='/neko'>neko</NavLink>
+<NavLink style = {{textDecoration : 'none', color: 'black'}} to='/profile'>neko</NavLink>
         </div>:<Button variant="contained" color="primary" onClick = {() =>setShowHeader(true)}>Show dev header</Button>
     }
     </div>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import s from '../Registration/registration.module.css';
+import s from '../Registration/Registration.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import {errorRegistrationData, sendRegistrationRequest} from "../../redux/registrationReducer";
 import {NavLink, Redirect} from "react-router-dom";

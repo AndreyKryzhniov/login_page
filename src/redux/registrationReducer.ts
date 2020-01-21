@@ -1,4 +1,4 @@
-import {apiRegistration} from '../apiRegistration/apiRegistration';
+import {apiRegistration} from '../api/apiRegistration';
 
 const ERROR_REGISTRATION_DATA = 'ERROR_REGISTRATION_DATA';
 const REGISTRATION_REQUEST = 'REGISTRATION_REQUEST';
