@@ -1,52 +1,45 @@
 import {profileApi} from '../api/apiProfile'
 import {Dispatch} from "redux";
 
-const ERROR = 'ERROR'
 const LOADING = 'LOADING'
-const DATA = 'DATA'
+const IS_AUTH = 'IS_AUTH'
+const NAME = 'NAME'
 
 interface IState {
     name: string
-    token: string
-    error: string
     isLoading: boolean
+    isAuth: boolean
 }
 
-interface IActionError {
-    type: typeof ERROR | typeof LOADING
-    error: string
+interface IAction {
+    type: typeof LOADING | typeof IS_AUTH | typeof NAME
     isLoading: boolean
-}
-
-interface IActionLoading {
-    type: typeof LOADING | typeof DATA
-    isLoading: boolean
-    token: string
     name: string
+    value: boolean
 }
 
 const initialState: IState = {
-    error: '',
     isLoading: false,
-    token: '',
-    name: ''
+    name: '',
+    isAuth: true
 }
 
-export const reducerProfile = (state: IState = initialState, action: IActionError | IActionLoading): IState => {
+export const reducerProfile = (state: IState = initialState, action: IAction): IState => {
     switch (action.type) {
-        case ERROR: {
-            return {
-                ...state, error: action.error
-            }
-        }
         case LOADING: {
             return {
                 ...state, isLoading: !state.isLoading
             }
         }
-        case DATA: {
+        case NAME: {
             return {
-                ...state, name: action.name, token: action.token
+                ...state, name: action.name
+            }
+        }
+        case IS_AUTH: {
+            debugger
+            return {
+                ...state, isAuth: action.value
             }
         }
         default: {
@@ -55,19 +48,27 @@ export const reducerProfile = (state: IState = initialState, action: IActionErro
     }
 }
 
-export let errorProfileAC = (error: string) => ({type: ERROR, error})
-let saveDataAC = (name: string, token: string) => ({type: DATA, name, token})
 let isLoadingAC = () => ({type: LOADING})
+let nameAC = (name: string) => ({type: NAME, name})
+export let isAuthTrue = () => ({type: IS_AUTH, value: true})
+export let isAuthFalse = () => ({type: IS_AUTH, value: false})
 
-export const postProfileTC = (token: string) => async (dispatch: Dispatch) => {
+export const postProfileTC = (token: string | null) => async (dispatch: Dispatch) => {
     try {
         dispatch(isLoadingAC())
         let response = await profileApi.postProfile(token)
-        dispatch(saveDataAC(response.data.name, response.data.token))
+        localStorage.setItem('stringToken', response.data.token)
+        dispatch(isAuthFalse())
+        dispatch(nameAC(response.data.name))
     } catch (e) {
-        dispatch(errorProfileAC(e.response.data.error))
+        console.log(e.response.data.error)
     }
     dispatch(isLoadingAC())
+}
+
+export const logoutTC = () =>  (dispatch: Dispatch) => {
+    localStorage.setItem('stringToken', '')
+    dispatch(isAuthTrue())
 }
 
 export default reducerProfile

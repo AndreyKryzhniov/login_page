@@ -12,11 +12,8 @@ const Login: React.FC = () => {
     let [password, setPasswordState] = useState('')
     let [rememberMe, setValueState] = useState(false)
     let error = useSelector((store: AppStateType) => store.login.error);
-    let isAuth = useSelector((store: AppStateType) => store.login.isLoading);
-    let tokenLogin = useSelector((store: AppStateType) => store.login.token);
-    let tokenProfile = useSelector((store: AppStateType) => store.profile.token);
-    // let token = useSelector((store: AppStateType) => store.login.token)
-    // let [tokenValue, setToken] = useState(token)
+    let isAuth = useSelector((store: AppStateType) => store.profile.isAuth);
+    let isLoading = useSelector((store: AppStateType) => store.login.isLoading);
 
     let dispatch = useDispatch()
 
@@ -33,22 +30,23 @@ const Login: React.FC = () => {
         }
     }
 
-    if (tokenLogin === tokenProfile) {
+    if (!isAuth) {
         return <Redirect to={'/profile'}/>
     }
+
 
     return (
         <div className={s.login}>
             <span>sing in</span>
             <span className={s.error}>{error}</span>
-            <input value={email} onChange={(e) => setLoginState(e.target.value)}/>
+            <input value={email} onChange={(e) => setLoginState(e.currentTarget.value)}/>
             <input value={password} onChange={(e) => setPasswordState(e.target.value)} type={'password'}/>
             <NavLink to={'/password_recover'}>Forgot password?</NavLink>
             <input type={'checkbox'} placeholder={'Remember Me'} onChange={() => setValueState(!rememberMe)}
                    checked={rememberMe}/>
-            <button onClick={sendData} disabled={isAuth}>Sing In</button>
+            <button onClick={sendData} disabled={isLoading}>Sing In</button>
             <NavLink to={'/registration'}>Registration</NavLink>
-            {isAuth &&
+            {isLoading &&
             <img src={loading}/>
             }
         </div>

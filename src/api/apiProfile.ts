@@ -5,7 +5,7 @@ const instance = axios.create({
 })
 
 export const profileApi = {
-    postProfile(token: string) {
+    postProfile(token: string | null) {
         return instance.post(`me`, {token})
     }
 }

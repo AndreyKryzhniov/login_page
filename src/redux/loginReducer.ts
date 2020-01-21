@@ -1,38 +1,28 @@
 import {loginApi} from '../api/apiLogin'
 import {Dispatch} from "redux";
+import { isAuthFalse } from './profileReducer';
 
 const ERROR = 'ERROR'
 const LOADING = 'LOADING'
-const DATA = 'DATA'
 
 interface IState {
-    name: string
-    token: string
     error: string
     isLoading: boolean
 }
 
-interface IActionError {
+interface IAction {
     type: typeof ERROR | typeof LOADING
     error: string
     isLoading: boolean
 }
 
-interface IActionLoading {
-    type: typeof LOADING | typeof DATA
-    isLoading: boolean
-    token: string
-    name: string
-}
 
 const initialState: IState = {
     error: '',
-    isLoading: false,
-    token: '4620b880-3bcf-11ea-a0b1-c165d13b809e',
-    name: ''
+    isLoading: false
 }
 
-const reducerLogin = (state: IState = initialState, action: IActionError | IActionLoading): IState => {
+const reducerLogin = (state: IState = initialState, action: IAction): IState => {
     switch (action.type) {
         case ERROR: {
             return {
@@ -44,11 +34,6 @@ const reducerLogin = (state: IState = initialState, action: IActionError | IActi
                 ...state, isLoading: !state.isLoading
             }
         }
-        case DATA: {
-            return {
-                ...state, name: action.name, token: action.token
-            }
-        }
         default: {
             return state
         }
@@ -56,15 +41,16 @@ const reducerLogin = (state: IState = initialState, action: IActionError | IActi
 }
 
 export let errorLoginAC = (error: string) => ({type: ERROR, error})
-let saveDataAC = (name: string, token: string) => ({type: DATA, name, token})
 let isLoginAC = () => ({type: LOADING})
 
 export const putLoginTC = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch) => {
     try {
         dispatch(isLoginAC())
-        debugger
         let response = await loginApi.putLogin(email, password, rememberMe)
-        dispatch(saveDataAC(response.data.name, response.data.token))
+        if (response.data.rememberMe) {
+            localStorage.setItem('stringToken', response.data.token)
+        }
+        dispatch(isAuthFalse())
     } catch (e) {
         dispatch(errorLoginAC(e.response.data.error))
     }
