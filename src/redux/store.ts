@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
     login: reducerLogin,
     registration: reducerRegistration,
     profile: reducerProfileRecovery,
-})
+});
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
