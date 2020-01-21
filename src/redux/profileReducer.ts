@@ -37,7 +37,6 @@ export const reducerProfile = (state: IState = initialState, action: IAction): I
             }
         }
         case IS_AUTH: {
-            debugger
             return {
                 ...state, isAuth: action.value
             }
