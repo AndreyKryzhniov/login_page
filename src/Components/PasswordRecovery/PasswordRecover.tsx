@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import s from './Password.module.css'
 import { useDispatch } from 'react-redux';
-import { sendRecoveryPasswordRequest } from '../redux/passwordRecoveryReducer';
+import { sendRecoveryPasswordRequest } from '../../redux/passwordRecoveryReducer';
 
 
 
@@ -16,7 +17,7 @@ const PasswordRecover: React.FC = () => {
   }
   
   return (
-    <div>
+    <div className={s.recover}>
         <div>Forgot password</div>
         <input onChange = {sendEmailValue}></input>
         <button onClick = {sendRecoveryPassword}>Send request</button>

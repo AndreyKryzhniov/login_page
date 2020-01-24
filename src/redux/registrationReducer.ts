@@ -1,6 +1,6 @@
-import {apiRegistration} from '../apiRegistration/apiRegistration';
+import {apiRegistration} from '../api/apiRegistration';
 import {AppStateType} from "./store";
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
 const ERROR_REGISTRATION_DATA = 'ERROR_REGISTRATION_DATA';
 const REGISTRATION_REQUEST = 'REGISTRATION_REQUEST';

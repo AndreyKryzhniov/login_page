@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import s from '../Registration/registration.module.css';
+import s from '../Registration/Registration.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import {errorRegistrationData, sendRegistrationRequest} from "../../redux/registrationReducer";
 import {NavLink, Redirect} from "react-router-dom";
@@ -33,24 +33,23 @@ const Registration: React.FC = () => {
         dispatch(errorRegistrationData(``));
     };
     const validate = (email: string) => {
-        const expression =  /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,7}$/i;
+        const expression = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,7}$/i;
         return expression.test(String(email).toLowerCase())
     };
 
     const onRegisterClick = (): void => {
-        if(repeatPassword !== password) {
+        if (repeatPassword !== password) {
             dispatch(errorRegistrationData(`Passwords don't match`))
-        }else if (password.length <= 7){
-            dispatch(errorRegistrationData(`Password must contain minimum 7 symbols`))
-        }else if(!validate(email)) {
+        } else if (password.length <= 7) {
+            dispatch(errorRegistrationData(`Password must contain minimum 8 symbols`))
+        } else if (!validate(email)) {
             dispatch(errorRegistrationData(`Email is not valid`))
-        }
-        else{
+        } else {
             dispatch(sendRegistrationRequest(email, password))
         }
     };
 
-    if(success) return <Redirect to="/login"/>;
+    if (success) return <Redirect to="/login"/>;
 
     return (
         <div className={s.registration}>
@@ -76,5 +75,6 @@ const Registration: React.FC = () => {
         </div>
     );
 };
+
 
 export default Registration;
